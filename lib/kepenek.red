@@ -44,4 +44,24 @@ ek: object [
       ]
     ]
   ];yor
+  er: func [kelime][
+    either last kelime sesliharf [
+      return rejoin [kelime "r"]
+    ][
+      switch lastvowel kelime [
+        "a" "ı" [
+          return rejoin [kelime "ar"]
+        ]
+        "e" "i" [
+          return rejoin [kelime "er"]
+        ]
+        "o" "u" [
+          return rejoin [kelime "ur"]
+        ]
+        "ö" "ü" [
+          return rejoin [kelime "ör"]
+        ]
+      ]
+    ]
+  ];er
 ];ek
