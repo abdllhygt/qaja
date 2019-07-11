@@ -12,3 +12,10 @@ include?: func [a [any-type!] b [series!]][
       not empty? intersect b a
   ][to-logic find b a]
 ]
+
+changelast: func [a [string!] b][
+  a: reverse a
+  a/1: b
+  a: reverse a
+  return a
+]
