@@ -6,7 +6,7 @@ include %eway.red
 
 ek: object [
   sesliharf: ["a" "e" "ı" "i" "o" "u" "ö" "ü"]
-  yor: func [kelime][
+  yor: func [kelime /sonsesli][
     either include? last kelime sesliharf [
       either include? last kelime ["e" "i"] [
         kelime: changelast kelime "i"
@@ -26,7 +26,22 @@ ek: object [
         ]
       ]
     ][;sessiz harfse
-
+      if kelime = "git" [kelime: "gid"]
+      sonsesli: lastvowel kelime
+      switch sonsesli [
+        "a" "ı" [
+          return rejoin [kelime "ıyor"]
+        ]
+        "e" "i" [
+          return rejoin [kelime "iyor"]
+        ]
+        "o" "u" [
+          return rejoin [kelime "uyor"]
+        ]
+        "ö" "ü" [
+          return rejoin [kelime "üyor"]
+        ]
+      ]
     ]
-  ]
-]
+  ];yor
+];ek
