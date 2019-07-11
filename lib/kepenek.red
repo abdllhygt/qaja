@@ -1,67 +1,87 @@
 Red [
   title: "Türkçe Ek Kütüphanesi"
+  author: "Abdullah Yiğiterol"
 ]
 
-include %eway.red
+do %eway.red
 
-ek: object [
-  sesliharf: ["a" "e" "ı" "i" "o" "u" "ö" "ü"]
-  yor: func [kelime /sonsesli][
+ek: context [
+  sesliharf: "aeıiouöü"
+  yor: func [kelime /sonsesli ret][
     either include? last kelime sesliharf [
-      either include? last kelime ["e" "i"] [
+      either include? last kelime "ei" [
         kelime: changelast kelime "i"
-        return rejoin[kelime "yor"]
+        ret: rejoin[kelime "yor"]
       ][;e,i değilse
-        either include? last kelime ["a" "ı"] [
+        either include? last kelime "aı" [
           kelime: changelast kelime "ı"
-          return rejoin[kelime "yor"]
+          ret: rejoin[kelime "yor"]
         ][;a,ı değilse
-          either include? last kelime ["o" "u"] [
+          either include? last kelime "ou" [
             kelime: changelast kelime "u"
-            return rejoin[kelime "yor"]
+            ret: rejoin[kelime "yor"]
           ][;o,u değilse
             kelime: changelast kelime "ü"
-            return rejoin[kelime "yor"]
+            ret: rejoin[kelime "yor"]
           ]
         ]
       ]
     ][;sessiz harfse
       if kelime = "git" [kelime: "gid"]
+      if kelime = "et" [kelime: "ed"]
       sonsesli: lastvowel kelime
       switch sonsesli [
-        "a" "ı" [
-          return rejoin [kelime "ıyor"]
+        "a" [
+          ret: rejoin [kelime "ıyor"]
         ]
-        "e" "i" [
-          return rejoin [kelime "iyor"]
+        "ı" "i" [
+          either sonsesli == "ı" [
+            ret: rejoin [kelime "ıyor"]
+          ][
+            ret: rejoin [kelime "iyor"]
+          ]
+        ]
+        "e"[
+          ret: rejoin [kelime "iyor"]
         ]
         "o" "u" [
-          return rejoin [kelime "uyor"]
+          ret: rejoin [kelime "uyor"]
         ]
         "ö" "ü" [
-          return rejoin [kelime "üyor"]
+          ret: rejoin [kelime "üyor"]
         ]
       ]
     ]
+    return ret
   ];yor
-  er: func [kelime][
-    either last kelime sesliharf [
-      return rejoin [kelime "r"]
+  er: func [kelime /ret][
+    either include? (last kelime) sesliharf [
+      ret: rejoin [kelime "r"]
     ][
-      switch lastvowel kelime [
-        "a" "ı" [
-          return rejoin [kelime "ar"]
+      case [
+        (lastvowel kelime) = "a" [
+          print lastvowel kelime
+          ret: rejoin [kelime "ar"]
         ]
-        "e" "i" [
-          return rejoin [kelime "er"]
+        (lastvowel kelime) == "ı" [
+          print lastvowel kelime
+          ret: rejoin [kelime "ar"]
         ]
-        "o" "u" [
-          return rejoin [kelime "ur"]
+        (lastvowel kelime) == "I" [
+          print lastvowel kelime
+          ret: rejoin [kelime "ar"]
         ]
-        "ö" "ü" [
-          return rejoin [kelime "ör"]
+        include? lastvowel kelime "ei" [
+          ret: rejoin [kelime "er"]
+        ]
+        include? lastvowel kelime "ou" [
+          ret: rejoin [kelime "ur"]
+        ]
+        include? lastvowel kelime "öü" [
+          ret: rejoin [kelime "ür"]
         ]
       ]
     ]
+    return ret
   ];er
 ];ek
