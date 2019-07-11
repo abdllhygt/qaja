@@ -19,3 +19,18 @@ changelast: func [a [string!] b][
   a: reverse a
   return a
 ]
+
+lastvowel: func [a [string!]][
+  either include? last a ["a" "e" "ı" "i" "o" "u" "ö" "ü" "é" "â"] [
+    return last a
+  ][
+    a: reverse a
+    remove a
+    foreach i a [
+      if include? i ["a" "e" "ı" "i" "o" "u" "ö" "ü" "é" "â"][
+        return i
+      ]
+    ]
+  ]
+  return ""
+]
