@@ -48,10 +48,18 @@ comment {include?: func [a [any-type!] b [series!] /preret ret][
 }
 
 include?: func [a [any-type!] b [series!]][
-  either series? :a [
+  either block? :a [
       if not same? type? :b type? :a [a: to type? :b :a]
       not empty? intersect b a
   ][to-logic find b a]
+]
+
+findnum: func [a [any-type!] b [block!]][
+  either include? a b [
+    return (length? b) - (length? find b a) + 1
+  ][
+    return 0
+  ]
 ]
 
 changelast: func [a [string!] b [string!] /aCopy][
