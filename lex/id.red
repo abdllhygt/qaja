@@ -21,3 +21,11 @@ u: func [a [block!] /aTranslated][;dan
   ]
   return concat aTranslated[[", "] " dan "]
 ]
+
+uno: func [a [block!] /aTranslated][;dan
+  aTranslated: copy []
+  foreach i a [
+    append aTranslated (db/translate "qq" "id" i)
+  ]
+  return concat aTranslated[[", "] " atau "]
+]
