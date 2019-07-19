@@ -19,5 +19,5 @@ u: func [a [block!] /aTranslated][;dan
   foreach i a [
     append aTranslated (db/translate "qq" "id" i)
   ]
-  return remove rejoin [" " aTranslated]
+  return concat aTranslated[[", "] " dan "]
 ]
