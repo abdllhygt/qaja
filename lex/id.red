@@ -28,7 +28,7 @@ u: func [a [block!] /newblock][;dan
   foreach i a [
     append newblock do i
   ]
-  return concat newblock[[", "] " dan "]
+  return andlist newblock "dan"
 ]
 
 uno: func [a [block!] /newblock][;dan
@@ -36,5 +36,5 @@ uno: func [a [block!] /newblock][;dan
   foreach i a [
     append newblock do i
   ]
-  return concat newblock[[", "] " atau "]
+  return andlist newblock "atau"
 ]
