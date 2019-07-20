@@ -11,8 +11,13 @@ db: context [
     road1: rejoin [%db/ lang1 "/"]
     road2: rejoin [%db/ lang2 "/"]
     words1: do rejoin [road1 "i"]
-    if include? word words1 [
+    either include? word words1 [
       words2: do rejoin [road2 "i"]
+      num: findnum word words1
+      result: words2/(num)
+    ][
+      words1: do rejoin [road1 "he"]
+      words2: do rejoin [road2 "he"]
       num: findnum word words1
       result: words2/(num)
     ]
