@@ -29,3 +29,11 @@ ieoa [
     text: ku "Abdullah"
   ]
 ]
+
+ia [
+  type: "o" | "w" | "ow" | ""
+  word: "nama"
+  adjective: "hehaha"
+  number: 1
+  determiner: "bazı" | "her" | "this"
+]

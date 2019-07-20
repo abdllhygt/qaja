@@ -6,26 +6,30 @@ ku: func [k][
   return k
 ]
 
--e: func [a [block!] /aTranslated][
-  aTranslated: copy []
-  foreach i a [
-    append aTranslated (db/translate "qq" "id" i)
-  ]
-  return remove rejoin [" " aTranslated]
+ia: func [a [block!]][
+  return db/translate "qq" "id" a/word
 ]
 
-u: func [a [block!] /aTranslated][;dan
-  aTranslated: copy []
+-e: func [a [block!] /newblock][
+  newblock: copy []
   foreach i a [
-    append aTranslated (db/translate "qq" "id" i)
+    append newblock do i
   ]
-  return concat aTranslated[[", "] " dan "]
+  return remove rejoin [" " newblock]
 ]
 
-uno: func [a [block!] /aTranslated][;dan
-  aTranslated: copy []
+u: func [a [block!] /newblock][;dan
+  newblock: copy []
   foreach i a [
-    append aTranslated (db/translate "qq" "id" i)
+    append newblock do i
   ]
-  return concat aTranslated[[", "] " atau "]
+  return concat newblock[[", "] " dan "]
+]
+
+uno: func [a [block!] /newblock][;dan
+  newblock: copy []
+  foreach i a [
+    append newblock do i
+  ]
+  return concat newblock[[", "] " atau "]
 ]
