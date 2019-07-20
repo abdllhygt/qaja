@@ -6,8 +6,13 @@ ku: func [k][
   return k
 ]
 
-ia: func [a [block!]][
-  return db/translate "qq" "id" a/word
+ia: func [a [block!] /adjective word][
+  word: db/translate "qq" "id" a/word
+  if a/adjective [
+    adjective: db/translate "qq" "id" a/adjective
+    word: rejoin[word " " adjective]
+  ]
+  return word
 ]
 
 -e: func [a [block!] /newblock][
