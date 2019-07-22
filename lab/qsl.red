@@ -35,3 +35,5 @@ ia [
   determiner: "o" | "" | "na" | "ni" | "nia" | "bazı" | "her"
   number: false
 ]
+
+mn "m"

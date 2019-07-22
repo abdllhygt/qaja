@@ -29,6 +29,24 @@ ia: func [a [block!] /adjective word][
   return word
 ]
 
+mn: func [a [string!]][
+  switch/default a [
+    "m" [return "saya"]
+    "n" [return "anda"]
+    "na" [return "itu"]
+    "nazo" [return "dia"]
+    "naxo" [return "dia"]
+    "ni" [return "ini"]
+    "nia" [return "ini"]
+    "kisa" [return "kita"]
+    "kimi" [return "kami"]
+    "kini" [return "kalian"]
+    "naw" [return "mereka"]
+  ][
+    return "dia"
+  ]
+]
+
 oa: func [a [block!]][
   return db/translate-o "qq" "id" a/word
 ]
