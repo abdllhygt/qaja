@@ -31,9 +31,9 @@ ieoa [
 ]
 
 ia [
-  type: "o" | "w" | "ow" | ""
+  plural: false
   word: "nama"
   adjective: "hehaha"
-  number: 1
-  determiner: "bazı" | "her" | "this"
+  determiner: "o" | "" | "na" | "ni" | "nia" | "bazı" | "her"
+  number: false
 ]

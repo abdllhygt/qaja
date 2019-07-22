@@ -2,15 +2,25 @@ Red [
   author: "Abdullah Yiğiterol"
 ]
 
-ku: func [k][
+ju: func [k][
   return k
 ]
 
 ia: func [a [block!] /adjective word][
   word: db/translate "qq" "id" a/word
+  if a/plural [
+    word: rejoin[word "-" word]
+  ]
   if a/adjective [
     adjective: db/translate "qq" "id" a/adjective
     word: rejoin[word " " adjective]
+  ]
+  if a/determiner [
+    either include? a/determiner ["ni" "na" "nia"][
+      word: rejoin[word " ini"]
+    ][
+      word: rejoin[a/determiner " " word]
+    ]
   ]
   return word
 ]
