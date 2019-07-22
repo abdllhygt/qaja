@@ -17,7 +17,11 @@ ia: func [a [block!] /adjective word][
   ]
   if a/determiner [
     either include? a/determiner ["ni" "na" "nia"][
-      word: rejoin[word " ini"]
+      either a/determiner = "ni" [
+        word: rejoin[word " ini"]
+      ][
+        word: rejoin[word " itu"]
+      ]
     ][
       word: rejoin[a/determiner " " word]
     ]
