@@ -52,3 +52,9 @@ uno: func [a [block!] /newblock][;dan
   ]
   return andlist newblock "atau"
 ]
+
+ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
+  if include? "o" typegroup [
+    
+  ]
+]
