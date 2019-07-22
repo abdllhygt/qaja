@@ -76,7 +76,12 @@ uno: func [a [block!] /newblock][;dan
 ]
 
 ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
+  sentence: ""
   if include? "o" typegroup [
-
+    sentence: do blockgroup/(findnum "o" typegroup)/text
+    sentence: rejoin [sentence ", "]
+  ]
+  if include? "i" typegroup [
+    append sentence do blockgroup/(findnum "i" typegroup)/text
   ]
 ]
