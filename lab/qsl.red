@@ -21,14 +21,12 @@ o [] ;yes
 
 ieoa [
   [
-    type: "i"
-    text: qaja "m"
+    text: oa [word: ""]
   ]
   [
-    type: "e"
-    text: ku "Abdullah"
+    text: ju "Abdullah"
   ]
-]
+]["o" "i"]; yes, Abdullah
 
 ia [
   plural: false

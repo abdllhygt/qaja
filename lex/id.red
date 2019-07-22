@@ -29,6 +29,10 @@ ia: func [a [block!] /adjective word][
   return word
 ]
 
+oa: func [a [block!]][
+  return db/translate-o "qq" "id" a/word
+]
+
 -e: func [a [block!] /newblock][
   newblock: copy []
   foreach i a [
@@ -55,6 +59,6 @@ uno: func [a [block!] /newblock][;dan
 
 ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
   if include? "o" typegroup [
-    
+
   ]
 ]
