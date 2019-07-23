@@ -29,6 +29,36 @@ ia: func [a [block!] /adjective word][
   return word
 ]
 
+aa: func [a block! /word][
+  word: db/translate-a "qq" "id" a/word
+  switch a/tense [
+    "za" [
+      word: rejoin["sedang " word]
+      if a/negative [
+          word: rejoin["tidak " word]
+      ]
+    ]
+    "ka" [
+      word: rejoin["akan " word]
+      if a/negative [
+          word: rejoin["tidak " word]
+      ]
+    ]
+    "pa" [
+      either a/negative [
+        word: rejoin["belum " word]
+      ][
+        word: rejoin["sudah " word]
+      ]
+    ]
+  ]
+  return word
+]
+
+oa: func [a [block!]][
+  return db/translate-o "qq" "id" a/word
+]
+
 mn: func [a [string!]][
   switch/default a [
     "m" [return "saya"]
@@ -45,10 +75,6 @@ mn: func [a [string!]][
   ][
     return "dia"
   ]
-]
-
-oa: func [a [block!]][
-  return db/translate-o "qq" "id" a/word
 ]
 
 -e: func [a [block!] /newblock][

@@ -34,4 +34,17 @@ db: context [
     ]
     return result
   ]
+  translate-a: func [lang1 lang2 word][
+    road1: rejoin [%db/ lang1 "/a"]
+    road2: rejoin [%db/ lang2 "/a"]
+    words1: do road1
+    either include? word words1 [
+      words2: do road2
+      num: findnum word words1
+      result: words2/(num)
+    ][
+      result: words
+    ]
+    return result
+  ]
 ]

@@ -36,4 +36,13 @@ ia [
   number: false
 ]
 
+aa [
+  tense: "a"
+  word: "qaja"
+]
+
+oa [
+  word: "o"
+]
+
 mn "m"
