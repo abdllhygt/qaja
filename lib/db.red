@@ -3,11 +3,13 @@ Red [
   title: "Translate Words Lib"
 ]
 
+dbroad: %../../db/
+
 db: context [
 
   translate: func [lang1 lang2 word /road1 road2 words1 words2 result num][
-    road1: rejoin [%db/ lang1 "/"]
-    road2: rejoin [%db/ lang2 "/"]
+    road1: rejoin [dbroad lang1 "/"]
+    road2: rejoin [dbroad lang2 "/"]
     words1: do rejoin [road1 "i"]
     either include? word words1 [
       words2: do rejoin [road2 "i"]
@@ -22,8 +24,8 @@ db: context [
     return result
   ];translate
   translate-o: func [lang1 lang2 word][
-    road1: rejoin [%db/ lang1 "/o"]
-    road2: rejoin [%db/ lang2 "/o"]
+    road1: rejoin [dbroad lang1 "/o"]
+    road2: rejoin [dbroad lang2 "/o"]
     words1: do road1
     either include? word words1 [
       words2: do road2
@@ -35,8 +37,8 @@ db: context [
     return result
   ]
   translate-a: func [lang1 lang2 word][
-    road1: rejoin [%db/ lang1 "/a"]
-    road2: rejoin [%db/ lang2 "/a"]
+    road1: rejoin [dbroad lang1 "/a"]
+    road2: rejoin [dbroad lang2 "/a"]
     words1: do road1
     either include? word words1 [
       words2: do road2
