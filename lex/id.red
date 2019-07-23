@@ -147,6 +147,22 @@ ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
     if include? "a" typegroup [
       append sentence " "
       append sentence do blockgroup/(findnum "a" typegroup)/text
+      if include? "e" typegroup [
+        append sentence " "
+        append sentence do blockgroup/(findnum "e" typegroup)/text
+      ];if e
+      if include? "ze" typegroup [
+        append sentence " di"
+        append sentence do blockgroup/(findnum "ze" typegroup)/text
+      ];if ze
+      if include? "ke" typegroup [
+        append sentence " ke"
+        append sentence do blockgroup/(findnum "ke" typegroup)/text
+      ];if ke
+      if include? "pe" typegroup [
+        append sentence " dari"
+        append sentence do blockgroup/(findnum "pe" typegroup)/text
+      ];if pe
     ];if a
   ];if i
   return sentence
