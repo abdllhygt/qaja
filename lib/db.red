@@ -16,10 +16,17 @@ db: context [
       num: findnum word words1
       result: words2/(num)
     ][
-      words1: do rejoin [road1 "he"]
-      words2: do rejoin [road2 "he"]
-      num: findnum word words1
-      result: words2/(num)
+      words1: do rejoin [road1 "me"]
+      either include? word words1 [
+        words2: do rejoin [road2 "me"]
+        num: findnum word words1
+        result: words2/(num)
+      ][
+        words1: do rejoin [road1 "he"]
+        words2: do rejoin [road2 "he"]
+        num: findnum word words1
+        result: words2/(num)
+      ]
     ]
     return result
   ];translate
