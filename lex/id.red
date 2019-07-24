@@ -167,3 +167,11 @@ ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
   ];if i
   return sentence
 ]
+
+zu: func [a [string!] b [string!]][
+  return rejoin[a " ketika " b]
+]
+
+su: func [a [string!] b [string!]][
+  return rejoin[a " jika " b]
+]
