@@ -7,6 +7,6 @@ do %import.red
 while [true] [
   sentenceC: ask "qq>> "
   if sentenceC = "." [quit]
-  prin "en== "
+  prin "id== "
   print to-qsl sentenceC
 ]
