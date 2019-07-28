@@ -11,7 +11,7 @@ ia: func [a [block!] /adjective word][
   unless a/plural = "" or none? a/plural  [
     word: rejoin[word "-" word]
   ]
-  unless a/adjective = "" or none? a/adjective  [ probe a/adjective
+  unless a/adjective = "" or none? a/adjective  [
     adjective: db/translate "qq" "id" a/adjective
     word: rejoin[word " " adjective]
   ]
@@ -23,7 +23,7 @@ ia: func [a [block!] /adjective word][
         word: rejoin[word " itu"]
       ]
     ][
-      word: rejoin[a/determiner " " word]
+      word: word
     ]
   ]
   return word
