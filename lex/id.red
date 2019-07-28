@@ -8,14 +8,14 @@ ju: func [k][
 
 ia: func [a [block!] /adjective word][
   word: db/translate "qq" "id" a/word
-  if a/plural [
+  unless a/plural = "" or none? a/plural  [
     word: rejoin[word "-" word]
   ]
-  if a/adjective [
+  unless a/adjective = "" or none? a/adjective  [ probe a/adjective
     adjective: db/translate "qq" "id" a/adjective
     word: rejoin[word " " adjective]
   ]
-  if a/determiner [
+  unless a/determiner = "" or none? a/determiner  [
     either include? a/determiner ["ni" "na" "nia"][
       either a/determiner = "ni" [
         word: rejoin[word " ini"]
