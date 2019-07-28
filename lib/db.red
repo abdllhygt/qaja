@@ -3,7 +3,7 @@ Red [
   title: "Translate Words Lib"
 ]
 
-dbroad: %../../db/
+dbroad: %../db/
 
 db: context [
 
