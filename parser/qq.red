@@ -6,8 +6,8 @@ result: copy ""
 
 vowel: charset "aeoui"
 word-vowel: charset "ai"
-consonant: charset "qypshkzxnm"
-char: charset "aeouiqypshkzxnm"
+consonant: charset "qypshkzxnmj"
+char: charset "aeouiqypshkzxnmj"
 number: charset "123456789"
 !number: [number any [number | "0"]]
 
@@ -18,14 +18,18 @@ name: [any [vowel | consonant]]
 
 !ju: ["ju" space [consonant | vowel] any [consonant | vowel]]
 
-!o: ["o" opt [space copy _o [!xo | word]] ( unless value? '_o [_o: ""]
-  either _o = "" [
-    append result copy {(oa[word: "o"])}
-  ][
-    append result copy rejoin["(oa[word: {" _o  "}])"]
-  ]
-  _o: copy ""
-)]
+!o: [ (oText: copy "(oa[")
+  "o" opt [space copy _o [!xo | word]]
+  (
+    unless value? '_o [_o: ""]
+    either _o = "" [
+      append oText {word: "o" ])}
+    ][
+      append oText rejoin["word: {" _o  "}])"]
+    ]
+    _o: copy ""
+  )
+]
 
 !ia: [ (iaText: copy "(ia[")
   opt [copy _number !number space (append iaText rejoin["number: " _number " "])]
@@ -36,8 +40,13 @@ name: [any [vowel | consonant]]
   opt [space copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])]
   (
     append iaText "])"
-    append result iaText
-    iaText: copy ""
+  )
+]
+
+!-e: [ (-eText: copy "(-e[")
+  !ia "e" space (append -eText iaText) !ia (append -eText iaText) any ["e" space !ia (append -eText iaText)]
+  (
+    append -eText "])"
   )
 ]
 
@@ -45,7 +54,9 @@ name: [any [vowel | consonant]]
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
-    !o | !ia
+    !-e (result: copy -eText)
+    | !o (result: copy oText)
+    | !ia (result: copy iaText)
   ]
   print result
   return do result
