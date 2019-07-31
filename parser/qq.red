@@ -32,12 +32,25 @@ name: [any [vowel | consonant]]
 ]
 
 !ia: [ (iaText: copy "(ia[")
-  opt [copy _number !number space (append iaText rejoin["number: " _number " "])]
-  opt [copy _determiner  ["ni" | "nia" | "na"] space (append iaText rejoin[{determiner: "} _determiner {" }])]
-  copy _word [opt !xe word opt !xo] (append iaText rejoin[{word: "} _word {" }])
-  opt ["o" (append iaText rejoin[{determiner: "o" }])]
-  opt ["w" (append iaText rejoin[{plural: true }])]
-  opt [space copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])]
+  [
+    copy _number !number (append iaText rejoin["number: " _number " "])
+    | copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])
+    | copy _word [opt !xe word opt !xo] (append iaText rejoin[{word: "} _word {" }])
+      opt "o" (append iaText rejoin[{determiner: "o" }])
+      opt "w" (append iaText rejoin[{plural: true }])
+    | copy _determiner  ["ni" | "nia" | "na"] (append iaText rejoin[{determiner: "} _determiner {" }])
+  ]
+  any [
+    space
+    [
+      copy _number !number (append iaText rejoin["number: " _number " "])
+      | copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])
+      | copy _word [opt !xe word opt !xo] (append iaText rejoin[{word: "} _word {" }])
+        opt "o" (append iaText rejoin[{determiner: "o" }])
+        opt "w" (append iaText rejoin[{plural: true }])
+      | copy _determiner  ["ni" | "nia" | "na"] (append iaText rejoin[{determiner: "} _determiner {" }])
+    ]
+  ]
   (
     append iaText "])"
   )
