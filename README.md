@@ -1,3 +1,6 @@
+![qisau qaja](https://media.giphy.com/media/hSQVZROxkOtheAvXg3/giphy.gif)
+(the example translate qisau qaja to indonesian language)
+
 ![qisau qaja](https://i.ibb.co/WGfLFg7/flow-Root815.png)
 
 # qaja
