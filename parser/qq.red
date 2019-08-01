@@ -36,8 +36,8 @@ name: [any [vowel | consonant]]
     copy _number !number (append iaText rejoin["number: " _number " "])
     | copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])
     | copy _word [opt !xe word opt !xo] (append iaText rejoin[{word: "} _word {" }])
-      opt "o" (append iaText rejoin[{determiner: "o" }])
-      opt "w" (append iaText rejoin[{plural: true }])
+      opt ["o" (append iaText rejoin[{determiner: "o" }])]
+      opt ["w" (append iaText rejoin[{plural: true }])]
     | copy _determiner  ["ni" | "nia" | "na"] (append iaText rejoin[{determiner: "} _determiner {" }])
   ]
   any [
@@ -63,6 +63,15 @@ name: [any [vowel | consonant]]
   )
 ]
 
+!u: [ (uText: copy "(u[")
+  [!-e (append uText -eText)| !ia (append uText iaText)]
+  space "u" space
+  [!-e (append uText -eText)| !ia (append uText iaText)]
+  (
+    append uText "])"
+  )
+]
+
 
 to-qsl: func [sentence [string!]][
   result: copy ""
@@ -71,6 +80,6 @@ to-qsl: func [sentence [string!]][
     | !o (result: copy oText)
     | !ia (result: copy iaText)
   ]
-  print result
+  print ["qsl== " result]
   return do result
 ]
