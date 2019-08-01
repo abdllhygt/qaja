@@ -65,6 +65,7 @@ name: [any [vowel | consonant]]
 
 !u: [ (uText: copy "(u[")
   [!-e (append uText -eText)| !ia (append uText iaText)]
+  any [any space "," any space [!-e (append uText -eText)| !ia (append uText iaText)]]
   space "u" space
   [!-e (append uText -eText)| !ia (append uText iaText)]
   (
@@ -72,11 +73,23 @@ name: [any [vowel | consonant]]
   )
 ]
 
+!uno: [ (unoText: copy "(u[")
+  [!-e (append unoText -eText)| !ia (append unoText iaText)]
+  any [any space "," any space [!-e (append unoText -eText)| !ia (append unoText iaText)]]
+  space "uno" space
+  [!-e (append unoText -eText)| !ia (append unoText iaText)]
+  (
+    append unoText "])"
+  )
+]
+
 
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
-    !-e (result: copy -eText)
+    !uno (result: copy unoText)
+    | !u (result: copy uText)
+    | !-e (result: copy -eText)
     | !o (result: copy oText)
     | !ia (result: copy iaText)
   ]
