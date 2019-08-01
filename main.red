@@ -4,9 +4,9 @@ Red[
 
 do %import.red
 
-while [true] [
-  sentenceC: ask "qq>> "
+while [true] [ print "^[[35m    -----------------"
+  sentenceC: ask "^[[35mqq>> ^[[0m"
   if sentenceC = "." [quit]
-  prin "id== "
   print to-qsl sentenceC
+  prin "^[[35m"
 ]
