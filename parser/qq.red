@@ -46,10 +46,6 @@ name: [any [vowel | consonant]]
   )
 ]
 
-!aa: [ (aaText: copy "(aa[")
-  copy _wordA [opt !xe word opt !xo] (append aaText rejoin[{word: "} _wordA {"]) }])
-]
-
 !-e: [ (-eText: copy "(-e[")
   !ia "e" space (append -eText iaText) !ia (append -eText iaText) any ["e" space !ia (append -eText iaText)]
   (
@@ -109,11 +105,16 @@ name: [any [vowel | consonant]]
 !pe: ["p" !e (peText: copy eText)]
 !ke: ["k" !e (keText: copy eText)]
 
+!aa: [ (aaText: copy "(aa[")
+  copy _wordA [opt !xe word opt !xo] (append aaText rejoin[{word: "} _wordA {"]) }])
+]
+
 !a: [ "a" space (aText: copy "[text: ")
-  !aa (
-    append aText aaText
-    append aText " ]"
-  )
+  [ !aa (append aText aaText append aText " ]") |
+    (
+      append aText { (aa[word: ""]) ]}
+    )
+  ]
 ]
 
 !za: ["z" !a (zaText: copy aText)]
@@ -140,7 +141,7 @@ name: [any [vowel | consonant]]
   )
 ]
 
-!ieoa: [ (ieoaText: copy "ieoa[ " ieoaLast: copy "[")
+!ieoa: [ (ieoaText: copy "(ieoa[ " ieoaLast: copy "[")
   [
     !i (append ieoaText iText append ieoaLast { "i" })
     | !e (append ieoaText eText append ieoaLast { "e" })
@@ -172,13 +173,38 @@ name: [any [vowel | consonant]]
     append ieoaText "]"
     append ieoaLast "]"
     append ieoaText ieoaLast
+    append ieoaText ")"
   )
+]
+
+!zu: [
+  [  (zuText: copy "(zu ")
+    !ieoa space (append zuText ieoaText) "zu" space !ieoa (append zuText ieoaText append zuText " )")
+    | (zuText: copy "") !ieoa space (append zuText ieoaText) "uz" space !ieoa (insert zuText ieoaText)
+    (
+      insert zuText "(zu "
+      append zuText " )"
+    )
+  ]
+]
+
+!su: [
+  [  (suText: copy "(su ")
+    !ieoa space (append suText ieoaText) "su" space !ieoa (append suText ieoaText append suText " )")
+    | (suText: copy "") !ieoa space (append suText ieoaText) "us" space !ieoa (insert suText ieoaText)
+    (
+      insert suText "(su "
+      append suText " )"
+    )
+  ]
 ]
 
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
-    !ieoa (result: copy ieoaText)
+    !su (result: copy suText)
+    | !zu (result: copy zuText)
+    | !ieoa (result: copy ieoaText)
     | !uno (result: copy unoText)
     | !u (result: copy uText)
     | !-e (result: copy -eText)
