@@ -8,6 +8,7 @@ vowel: charset "aeoui"
 word-vowel: charset "ai"
 consonant: charset "qypshkzxnmj"
 char: charset "aeouiqypshkzxnmj"
+juchar: charset "abcçdefgoöuüıiqyprsşthklzxnmjvwéô"
 number: charset "123456789"
 !number: [number any [number | "0"]]
 
@@ -16,19 +17,8 @@ name: [any [vowel | consonant]]
 !xo: [consonant "o"]
 !xe: [consonant "e"]
 
-!ju: ["ju" space [consonant | vowel] any [consonant | vowel]]
-
-!o: [ (oText: copy "(oa[")
-  "o" opt [space copy _o [!xo | word]]
-  (
-    unless value? '_o [_o: ""]
-    either _o = "" [
-      append oText {word: "o" ])}
-    ][
-      append oText rejoin["word: {" _o  "}])"]
-    ]
-    _o: copy ""
-  )
+!ju: ["ju" (juText: copy {(ju "})
+  space copy _ju [juchar any juchar] (append juText rejoin[_ju {") }])
 ]
 
 !ia: [ (iaText: copy "(ia[")
@@ -64,33 +54,103 @@ name: [any [vowel | consonant]]
 ]
 
 !u: [ (uText: copy "(u[")
-  [!-e (append uText -eText)| !ia (append uText iaText)]
-  any [any space "," any space [!-e (append uText -eText)| !ia (append uText iaText)]]
+  [!-e (append uText -eText)| !ia (append uText iaText) | !ju (append uText juText)]
+  any [any space "," any space [!-e (append uText -eText)| !ia (append uText iaText)
+    | !ju (append uText juText)]]
   space "u" space
-  [!-e (append uText -eText)| !ia (append uText iaText)]
+  [!-e (append uText -eText)| !ia (append uText iaText) | !ju (append uText juText)]
   (
     append uText "])"
   )
 ]
 
 !uno: [ (unoText: copy "(u[")
-  [!-e (append unoText -eText)| !ia (append unoText iaText)]
-  any [any space "," any space [!-e (append unoText -eText)| !ia (append unoText iaText)]]
+  [!-e (append unoText -eText)| !ia (append unoText iaText) | !ju (append unoText juText)]
+  any [any space "," any space [!-e (append unoText -eText)| !ia (append unoText iaText)
+    | !ju (append unoText juText)]]
   space "uno" space
-  [!-e (append unoText -eText)| !ia (append unoText iaText)]
+  [!-e (append unoText -eText)| !ia (append unoText iaText) | !ju (append unoText juText)]
   (
     append unoText "])"
   )
 ]
 
+!i: [ "i" space (iText: copy "[text: ")
+  [
+    !uno (append iText unoText)
+    | !u (append iText uText)
+    | !-e (append iText -eText)
+    | !ju (append iText juText)
+    | !ia (append iText iaText)
+  ]
+  (
+    append iText "]"
+  )
+]
+
+!e: [ "e" space (eText: copy "[text: ")
+  [
+    !uno (append eText unoText)
+    | !u (append eText uText)
+    | !-e (append eText -eText)
+    | !ju (append eText juText)
+    | !ia (append eText iaText)
+  ]
+  (
+    append eText "]"
+  )
+]
+
+!oa: [ (oaText: copy "(oa[")
+  "o" opt [space copy _o [!xo | word]]
+  (
+    unless value? '_o [_o: ""]
+    either _o = "" [
+      append oaText {word: "o" ])}
+    ][
+      append oaText rejoin["word: {" _o  "}])"]
+    ]
+    _o: copy ""
+  )
+]
+
+!o: [ (oText: copy "[text: ")
+  !oa (
+    append oText oaText
+    append oText " ]"
+  )
+]
+
+!ieoa: [ (ieoaText: copy "ieoa[ " ieoaLast: copy "[")
+  [
+    !i (append ieoaText iText append ieoaLast { "i" })
+    | !e (append ieoaText eText append ieoaLast { "e" })
+    | !o (append ieoaText oText append ieoaLast { "o" })
+  ]
+  any [
+    space
+    [
+      !i (append ieoaText iText append ieoaLast { "i" })
+      | !e (append ieoaText eText append ieoaLast { "e" })
+      | !o (append ieoaText oText append ieoaLast { "o" })
+    ]
+  ]
+  (
+    append ieoaText "]"
+    append ieoaLast "]"
+    append ieoaText ieoaLast
+  )
+]
 
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
-    !uno (result: copy unoText)
+    !ieoa (result: copy ieoaText)
+    | !uno (result: copy unoText)
     | !u (result: copy uText)
     | !-e (result: copy -eText)
-    | !o (result: copy oText)
+    | !ju (result: copy juText)
+    | !oa (result: copy oText)
     | !ia (result: copy iaText)
   ]
   print ["^[[35mqsl==" result]
