@@ -46,6 +46,10 @@ name: [any [vowel | consonant]]
   )
 ]
 
+!aa: [ (aaText: copy "(aa[")
+  copy _wordA [opt !xe word opt !xo] (append aaText rejoin[{word: "} _wordA {"]) }])
+]
+
 !-e: [ (-eText: copy "(-e[")
   !ia "e" space (append -eText iaText) !ia (append -eText iaText) any ["e" space !ia (append -eText iaText)]
   (
@@ -101,6 +105,21 @@ name: [any [vowel | consonant]]
   )
 ]
 
+!ze: ["z" !e (zeText: copy eText)]
+!pe: ["p" !e (peText: copy eText)]
+!ke: ["k" !e (keText: copy eText)]
+
+!a: [ "a" space (aText: copy "[text: ")
+  !aa (
+    append aText aaText
+    append aText " ]"
+  )
+]
+
+!za: ["z" !a (zaText: copy aText)]
+!pa: ["p" !a (paText: copy aText)]
+!ka: ["k" !a (kaText: copy aText)]
+
 !oa: [ (oaText: copy "(oa[")
   "o" opt [space copy _o [!xo | word]]
   (
@@ -125,14 +144,28 @@ name: [any [vowel | consonant]]
   [
     !i (append ieoaText iText append ieoaLast { "i" })
     | !e (append ieoaText eText append ieoaLast { "e" })
+    | !ze (append ieoaText zeText append ieoaLast { "ze" })
+    | !pe (append ieoaText peText append ieoaLast { "pe" })
+    | !ke (append ieoaText keText append ieoaLast { "ke" })
     | !o (append ieoaText oText append ieoaLast { "o" })
+    | !a (append ieoaText aText append ieoaLast { "a" })
+    | !za (append ieoaText zaText append ieoaLast { "za" })
+    | !pa (append ieoaText paText append ieoaLast { "pa" })
+    | !ka (append ieoaText kaText append ieoaLast { "ka" })
   ]
   any [
     space
     [
       !i (append ieoaText iText append ieoaLast { "i" })
       | !e (append ieoaText eText append ieoaLast { "e" })
+      | !ze (append ieoaText zeText append ieoaLast { "ze" })
+      | !pe (append ieoaText peText append ieoaLast { "pe" })
+      | !ke (append ieoaText keText append ieoaLast { "ke" })
       | !o (append ieoaText oText append ieoaLast { "o" })
+      | !a (append ieoaText aText append ieoaLast { "a" })
+      | !za (append ieoaText zaText append ieoaLast { "za" })
+      | !pa (append ieoaText paText append ieoaLast { "pa" })
+      | !ka (append ieoaText kaText append ieoaLast { "ka" })
     ]
   ]
   (
