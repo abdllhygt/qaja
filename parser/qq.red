@@ -75,13 +75,24 @@ name: [any [vowel | consonant]]
   )
 ]
 
-!i: [ "i" space (iText: copy "[text: ")
+!i: [
   [
-    !uno (append iText unoText)
-    | !u (append iText uText)
-    | !-e (append iText -eText)
-    | !ju (append iText juText)
-    | !ia (append iText iaText)
+    "im" (iText: copy {[text: (mn "m")}) | "in" (iText: copy {[text: (mn "n")})
+    | "i na" (iText: copy {[text: (mn "na")}) | "i ni" (iText: copy {[text: (mn "ni")})
+    | "i kisa" (iText: copy {[text: (mn "kisa")}) | "i kimi" (iText: copy {[text: (mn "kimi")})
+    | "i kini" (iText: copy {[text: (mn "kini")}) | "i naw" (iText: copy {[text: (mn "naw")})
+  ]
+  (
+    append iText "]"
+  )
+  | [ "i" space (iText: copy "[text: ")
+    [
+      !uno (append iText unoText)
+      | !u (append iText uText)
+      | !-e (append iText -eText)
+      | !ju (append iText juText)
+      | !ia (append iText iaText)
+    ]
   ]
   (
     append iText "]"
@@ -202,14 +213,14 @@ name: [any [vowel | consonant]]
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
-    !su (result: copy suText)
+    !oa (result: copy oaText) end
+    | !su (result: copy suText)
     | !zu (result: copy zuText)
     | !ieoa (result: copy ieoaText)
     | !uno (result: copy unoText)
     | !u (result: copy uText)
     | !-e (result: copy -eText)
     | !ju (result: copy juText)
-    | !oa (result: copy oText)
     | !ia (result: copy iaText)
   ]
   print ["^[[35mqsl==" result]
