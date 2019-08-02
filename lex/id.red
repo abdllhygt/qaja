@@ -30,62 +30,64 @@ ia: func [a [block!] /adjective word][
 ]
 
 aa: func [a [block!] /word][
-  word: copy ""
-  either a/word [
+  word: copy "" comment {a/word = {} or a/word = false or a/word = none}
+  either not to-logic a/word [
+    either a/tense [
+      switch a/tense [
+        "za" [
+          word: "adalah"
+          if a/negative [
+              word: "bukan"
+          ]
+        ]
+        "ka" [
+          word: "akan jadi"
+          if a/negative [
+              word: "tidak akan jadi"
+          ]
+        ]
+        "pa" [
+          word: "sudah"
+          if a/negative [
+              word: "belum"
+          ]
+        ]
+      ];switch tense
+    ][;else tense
+      word: "adalah"
+      if a/negative [
+          word: "bukan"
+      ]
+    ]
+  ][;else
     word: db/translate-a "qq" "id" a/word
-    switch a/tense [
-      "a" [
-        if a/negative [
-            word: rejoin["tidak " word]
+    either a/tense [
+      switch a/tense [
+        "za" [
+          word: rejoin["sedang " word]
+          if a/negative [
+              word: rejoin["tidak " word]
+          ]
         ]
-      ]
-      "za" [
-        word: rejoin["sedang " word]
-        if a/negative [
-            word: rejoin["tidak " word]
+        "ka" [
+          word: rejoin["akan " word]
+          if a/negative [
+              word: rejoin["tidak " word]
+          ]
         ]
-      ]
-      "ka" [
-        word: rejoin["akan " word]
-        if a/negative [
-            word: rejoin["tidak " word]
+        "pa" [
+          either a/negative [
+            word: rejoin["belum " word]
+          ][
+            word: rejoin["sudah " word]
+          ]
         ]
+      ];switch tense
+    ][;else tense
+      if a/negative [
+          word: rejoin["tidak " word]
       ]
-      "pa" [
-        either a/negative [
-          word: rejoin["belum " word]
-        ][
-          word: rejoin["sudah " word]
-        ]
-      ]
-    ];tense
-  ][
-    switch a/tense [
-      "a" [
-        word: "adalah"
-        if a/negative [
-            word: "bukan"
-        ]
-      ]
-      "za" [
-        word: "adalah"
-        if a/negative [
-            word: "bukan"
-        ]
-      ]
-      "ka" [
-        word: "akan jadi"
-        if a/negative [
-            word: "tidak akan jadi"
-        ]
-      ]
-      "pa" [
-        word: "sudah"
-        if a/negative [
-            word: "belum"
-        ]
-      ]
-    ];tense
+    ]
   ]
   return word
 ]
