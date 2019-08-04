@@ -9,9 +9,10 @@ lang2: "Bahasa Indonesia"
 callMain: func [a [string!] b [string!] c [string!] /outtext intext][
   intext: copy c
   outtext: copy ""
-  intext: replace intext  "(" "\("
-  intext: replace intext  ")" "\)"
-  intext: replace intext  {"} {\"}
+  intext: replace/all intext  "(" "\("
+  intext: replace/all intext  ")" "\)"
+  intext: replace/all intext  {"} {\"}
+  intext: replace/all intext  "^/" ""
   call/shell/output rejoin["../red ../qaja/main.red " a " " b " " intext] outtext
   return outtext
 ]
