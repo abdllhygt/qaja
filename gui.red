@@ -36,7 +36,17 @@ view [ title "Qaja Translation Engine"
         ]
       ]; switch lang2
     ][
-
+      switch lang2 [
+        "Bahasa Indonesia" [
+          area2/text: callMain "qsl" "id" area1/text
+        ]
+        "QSL" [
+          area2/text: area1/text
+        ]
+        "Qisau Qaja" [
+          area2/text: "not finished!"
+        ]
+      ]; switch lang2
     ]
   ]
   area2: area "" disabled font-color red 400x200
