@@ -234,6 +234,14 @@ zu: func [a [string!] b [string!]][
   return rejoin[a " ketika " b]
 ]
 
+zupa: func [a [string!] b [string!]][
+  return rejoin[a " sebelum " b]
+]
+
+zuka: func [a [string!] b [string!]][
+  return rejoin[a " setelah " b]
+]
+
 su: func [a [string!] b [string!]][
   return rejoin[a " jika " b]
 ]
