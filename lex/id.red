@@ -237,3 +237,7 @@ zu: func [a [string!] b [string!]][
 su: func [a [string!] b [string!]][
   return rejoin[a " jika " b]
 ]
+
+hu: func [a [string!] b [string!]][
+  return rejoin[a " tentang " b]
+]
