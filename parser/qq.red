@@ -265,7 +265,5 @@ to-qsl: func [sentence [string!]][
     | !ju (result: copy juText)
     | !ia (result: copy iaText)
   ]
-  print ["^[[35mqsl==" result]
-  prin "^[[36mid== ^[[33m"
-  return do result
+  return result
 ]
