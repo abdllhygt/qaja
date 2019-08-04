@@ -205,6 +205,28 @@ name: [any [vowel | consonant]]
   ]
 ]
 
+!zupa: [
+  [  (zupaText: copy "(zupa ")
+    !ieoa space (append zupaText ieoaText) "zupa" space !ieoa (append zupaText ieoaText append zupaText " )")
+    | (zupaText: copy "") !ieoa space (append zupaText ieoaText) "uzpa" space !ieoa (insert zupaText ieoaText)
+    (
+      insert zupaText "(zupa "
+      append zupaText " )"
+    )
+  ]
+]
+
+!zuka: [
+  [  (zukaText: copy "(zuka ")
+    !ieoa space (append zukaText ieoaText) "zuka" space !ieoa (append zukaText ieoaText append zukaText " )")
+    | (zukaText: copy "") !ieoa space (append zukaText ieoaText) "uzka" space !ieoa (insert zukaText ieoaText)
+    (
+      insert zukaText "(zuka "
+      append zukaText " )"
+    )
+  ]
+]
+
 !su: [
   [  (suText: copy "(su ")
     !ieoa space (append suText ieoaText) "su" space !ieoa (append suText ieoaText append suText " )")
@@ -231,8 +253,11 @@ to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
     !oa (result: copy oaText) end
+    | !zuka (result: copy zukaText)
+    | !zupa (result: copy zupaText)
     | !su (result: copy suText)
     | !zu (result: copy zuText)
+    | !hu (result: copy huText)
     | !ieoa (result: copy ieoaText)
     | !uno (result: copy unoText)
     | !u (result: copy uText)
