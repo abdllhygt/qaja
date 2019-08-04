@@ -70,6 +70,15 @@ changelast: func [a [string!] b [string!] /aCopy][
   return aCopy
 ]
 
+addspace: func [a [block!] /textA][
+  textA: a/1
+  remove a
+  foreach j a [
+    textA: rejoin [textA " " j]
+  ]
+  return textA
+]
+
 lastvowel: func [a [string!] /ret aCopy][
   aCopy: copy a
   either include? last aCopy "aeıiouöüéâ" [

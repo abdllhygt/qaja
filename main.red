@@ -10,7 +10,7 @@ either empty? system/options/args [
   remove system/options/args
   either system/options/args/1 = "qsl" [
     remove system/options/args
-    print to-qsl to-string system/options/args
+    print to-qsl addspace system/options/args
   ][
     if system/options/args/1 = "id" [
       do %lex/id.red
@@ -19,6 +19,6 @@ either empty? system/options/args [
       do %lex/en.red
     ]
     remove system/options/args
-    print do to-qsl to-string system/options/args
+    print do to-qsl addspace system/options/args
   ]
 ]
