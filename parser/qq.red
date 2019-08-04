@@ -249,7 +249,7 @@ name: [any [vowel | consonant]]
   ]
 ]
 
-to-qsl: func [sentence [string!][
+to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
     !oa (result: copy oaText) end

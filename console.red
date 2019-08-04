@@ -3,6 +3,7 @@ Red[
 ]
 
 do %import.red
+do %lex/id.red
 
 print {
    qaja tranlation engine
