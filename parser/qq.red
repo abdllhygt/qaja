@@ -216,6 +216,17 @@ name: [any [vowel | consonant]]
   ]
 ]
 
+!hu: [
+  [  (huText: copy "(hu ")
+    !ieoa space (append huText ieoaText) "hu" space !ieoa (append huText ieoaText append huText " )")
+    | (huText: copy "") !ieoa space (append huText ieoaText) "uh" space !ieoa (insert huText ieoaText)
+    (
+      insert huText "(hu "
+      append huText " )"
+    )
+  ]
+]
+
 to-qsl: func [sentence [string!]][
   result: copy ""
   parse sentence [
