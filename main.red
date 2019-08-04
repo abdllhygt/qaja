@@ -37,7 +37,6 @@ either empty? system/options/args [
           do %lex/en.red
         ]
         remove system/options/args
-        probe system/options/args
         print do addspace system/options/args
       ];second argument
     ]; qsl

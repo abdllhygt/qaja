@@ -6,9 +6,13 @@ Red [
 lang1: "Qisau Qaja"
 lang2: "Bahasa Indonesia"
 
-callMain: func [a [string!] b [string!] c [string!] /outtext][
+callMain: func [a [string!] b [string!] c [string!] /outtext intext][
+  intext: copy c
   outtext: copy ""
-  call/shell/output rejoin["../red ../qaja/main.red " a " " b " " c] outtext
+  intext: replace intext  "(" "\("
+  intext: replace intext  ")" "\)"
+  intext: replace intext  {"} {\"}
+  call/shell/output rejoin["../red ../qaja/main.red " a " " b " " intext] outtext
   return outtext
 ]
 
