@@ -1,3 +1,9 @@
+gui:
+
+![qisau qaja gui](https://media.giphy.com/media/XDe2LthrACXkJeD9iF/giphy.gif)
+
+console:
+
 ![qisau qaja](https://media.giphy.com/media/hSQVZROxkOtheAvXg3/giphy.gif)
 
 (the example translate qisau qaja to indonesian language)
