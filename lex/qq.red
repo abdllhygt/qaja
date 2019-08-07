@@ -3,25 +3,19 @@ Red [
 ]
 
 ju: func [k][
-  return k
+  return rejoin["ju" k]
 ]
 
 ia: func [a [block!] /adjective word][
-  word: db/translate "qq" "id" a/word
   unless a/plural = "" or none? a/plural  [
-    word: rejoin[word "-" word]
+    word: rejoin[word "w"]
   ]
   unless a/adjective = "" or none? a/adjective  [
-    adjective: db/translate "qq" "id" a/adjective
     word: rejoin[word " " adjective]
   ]
   unless a/determiner = "" or none? a/determiner  [
     either include? a/determiner ["ni" "na" "nia"][
-      either a/determiner = "ni" [
-        word: rejoin[word " ini"]
-      ][
-        word: rejoin[word " itu"]
-      ]
+      [word: rejoin[word " " a/determiner]]
     ][
       word: word
     ]
@@ -33,59 +27,28 @@ aa: func [a [block!] /word][
   word: copy "" comment {a/word = {} or a/word = false or a/word = none}
   either not to-logic a/word [
     either a/tense [
-      switch a/tense [
-        "za" [
-          word: "adalah"
-          if a/negative [
-              word: "bukan"
-          ]
-        ]
-        "ka" [
-          word: "akan jadi"
-          if a/negative [
-              word: "tidak akan jadi"
-          ]
-        ]
-        "pa" [
-          word: "sudah"
-          if a/negative [
-              word: "belum"
-          ]
-        ]
-      ];switch tense
-    ][;else tense
-      word: "adalah"
+      word: a/tense
       if a/negative [
-          word: "bukan"
+          word: rejoin[word " no"]
       ]
+      word: word: rejoin[word " " a/word]
+    ][;else tense
+      word: "a"
+      if a/negative [
+          word: rejoin[word " no"]
+      ]
+      word: word: rejoin[word " " a/word]
     ]
   ][;else
-    word: db/translate-a "qq" "id" a/word
     either a/tense [
-      switch a/tense [
-        "za" [
-          word: rejoin["sedang " word]
-          if a/negative [
-              word: rejoin["tidak " word]
-          ]
-        ]
-        "ka" [
-          word: rejoin["akan " word]
-          if a/negative [
-              word: rejoin["tidak " word]
-          ]
-        ]
-        "pa" [
-          either a/negative [
-            word: rejoin["belum " word]
-          ][
-            word: rejoin["sudah " word]
-          ]
-        ]
-      ];switch tense
-    ][;else tense
+      word: a/tense
       if a/negative [
-          word: rejoin["tidak " word]
+        word: rejoin[" no"]
+      ]
+    ][;else tense
+      word: "a"
+      if a/negative [
+        word: rejoin[" no"]
       ]
     ]
   ]
@@ -93,8 +56,12 @@ aa: func [a [block!] /word][
 ]
 
 oa: func [a [block!]][
-  return db/translate-o "qq" "id" a/word
-]
+  either a/word "o" [
+    return "o"
+  ][
+    return rejoin["o " a/word]
+  ]
+]; burada kaldım
 
 mn: func [a [string!]][
   switch/default a [
