@@ -12,7 +12,8 @@ callMain: func [a [string!] b [string!] c [string!] /outtext intext][
   intext: replace/all intext  "(" "\("
   intext: replace/all intext  ")" "\)"
   intext: replace/all intext  {"} {\"}
-  intext: replace/all intext  "^/" ""
+  intext: replace/all intext  "^/" " "
+  intext: replace/all intext  "  " " "
   call/shell/output rejoin["../red ../qaja/main.red " a " " b " " intext] outtext
   return outtext
 ]
@@ -26,7 +27,7 @@ view [ title "Qaja Translation Engine"
     lang2: pick drop2/data drop2/selected
   ]
   return return
-  area1: area "" focus 204.255.204 400x200
+  area1: area "" focus 204.255.204 800x200
   button "Translate" [
     either lang1 = "Qisau Qaja" [
       switch lang2 [
@@ -54,7 +55,6 @@ view [ title "Qaja Translation Engine"
       ]; switch lang2
     ]
   ]
-  area2: area "" disabled font-color red 400x200
   return
-  text ""
+  area2: area "" disabled font-color red 950x150
 ]
