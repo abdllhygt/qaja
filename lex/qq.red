@@ -67,31 +67,32 @@ mn: func [a [string!]][
   return a
 ]
 
--e: func [a [block!] /newblock][; burada kaldım
+-e: func [a [block!] /newblock][
+  newblock: copy []
+  foreach i a [
+    append newblock rejoin[(do i) "e "]
+  ]
+  newblock: changelast (to-string newblock) ""
+  return  changelast newblock ""
+]
+
+u: func [a [block!] /newblock][
   newblock: copy []
   foreach i a [
     append newblock do i
   ]
-  return remove rejoin [" " newblock]
+  return andlist newblock "u"
 ]
 
-u: func [a [block!] /newblock][;dan
+uno: func [a [block!] /newblock][
   newblock: copy []
   foreach i a [
     append newblock do i
   ]
-  return andlist newblock "dan"
+  return andlist newblock "uno"
 ]
 
-uno: func [a [block!] /newblock][;dan
-  newblock: copy []
-  foreach i a [
-    append newblock do i
-  ]
-  return andlist newblock "atau"
-]
-
-ieoa: func [blockgroup [block!] typegroup [block!] /sentence][
+ieoa: func [blockgroup [block!] typegroup [block!] /sentence][; buradayım
   sentence: copy ""
   if include? "o" typegroup [
     sentence: do blockgroup/(findnum "o" typegroup)/text

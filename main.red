@@ -20,6 +20,9 @@ either empty? system/options/args [
         if system/options/args/1 = "en" [
           do %lex/en.red
         ]
+        if system/options/args/1 = "qq" [
+          do %lex/qq.red
+        ]
         remove system/options/args
         print do to-qsl addspace system/options/args
       ];second argument
@@ -35,6 +38,9 @@ either empty? system/options/args [
         ]
         if system/options/args/1 = "en" [
           do %lex/en.red
+        ]
+        if system/options/args/1 = "qq" [
+          do %lex/qq.red
         ]
         remove system/options/args
         print do addspace system/options/args
