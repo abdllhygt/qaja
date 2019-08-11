@@ -61,27 +61,13 @@ oa: func [a [block!]][
   ][
     return rejoin["o " a/word]
   ]
-]; burada kaldım
-
-mn: func [a [string!]][
-  switch/default a [
-    "m" [return "saya"]
-    "n" [return "anda"]
-    "na" [return "itu"]
-    "nazo" [return "dia"]
-    "naxo" [return "dia"]
-    "ni" [return "ini"]
-    "nia" [return "ini"]
-    "kisa" [return "kita"]
-    "kimi" [return "kami"]
-    "kini" [return "kalian"]
-    "naw" [return "mereka"]
-  ][
-    return "dia"
-  ]
 ]
 
--e: func [a [block!] /newblock][
+mn: func [a [string!]][
+  return a
+]
+
+-e: func [a [block!] /newblock][; burada kaldım
   newblock: copy []
   foreach i a [
     append newblock do i
