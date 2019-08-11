@@ -94,112 +94,45 @@ uno: func [a [block!] /newblock][
 
 ieoa: func [blockgroup [block!] typegroup [block!] /sentence][; buradayım
   sentence: copy ""
-  if include? "o" typegroup [
-    sentence: do blockgroup/(findnum "o" typegroup)/text
-    sentence: rejoin [sentence ", "]
+  foreach t typegroup [
+    switch t [
+      "o" [append sentence rejoin ["o " blockgroup/1] ]
+      "i" [
+        either blockgroup/1/1 = "m" and blockgroup/1/2 = " " [
+          append sentence rejoin ["i" blockgroup/1]
+        ][
+          append sentence rejoin ["i " blockgroup/1]
+        ]
+      ]
+      "a" [append sentence ["a " blockgroup/1]]
+      "e" [
+        either blockgroup/1/1 = "m" and blockgroup/1/2 = " " [
+          append sentence rejoin ["e" blockgroup/1]
+        ][
+          append sentence rejoin ["e " blockgroup/1]
+        ]
+      ]
+    ]
   ]
-  if include? "i" typegroup [
-    append sentence do blockgroup/(findnum "i" typegroup)/text
-    if include? "a" typegroup [
-      append sentence " "
-      append sentence do blockgroup/(findnum "a" typegroup)/text
-      if include? "e" typegroup [
-        append sentence " "
-        append sentence do blockgroup/(findnum "e" typegroup)/text
-      ];if e
-      if include? "ze" typegroup [
-        append sentence " di"
-        append sentence do blockgroup/(findnum "ze" typegroup)/text
-      ];if ze
-      if include? "ke" typegroup [
-        append sentence " ke"
-        append sentence do blockgroup/(findnum "ke" typegroup)/text
-      ];if ke
-      if include? "pe" typegroup [
-        append sentence " dari"
-        append sentence do blockgroup/(findnum "pe" typegroup)/text
-      ];if pe
-    ];if a
-    if include? "za" typegroup [
-      append sentence " sedang "
-      append sentence do blockgroup/(findnum "za" typegroup)/text
-      if include? "e" typegroup [
-        append sentence " "
-        append sentence do blockgroup/(findnum "e" typegroup)/text
-      ];if e
-      if include? "ze" typegroup [
-        append sentence " di"
-        append sentence do blockgroup/(findnum "ze" typegroup)/text
-      ];if ze
-      if include? "ke" typegroup [
-        append sentence " ke"
-        append sentence do blockgroup/(findnum "ke" typegroup)/text
-      ];if ke
-      if include? "pe" typegroup [
-        append sentence " dari"
-        append sentence do blockgroup/(findnum "pe" typegroup)/text
-      ];if pe
-    ];if za
-    if include? "pa" typegroup [
-      append sentence " sudah "
-      append sentence do blockgroup/(findnum "pa" typegroup)/text
-      if include? "e" typegroup [
-        append sentence " "
-        append sentence do blockgroup/(findnum "e" typegroup)/text
-      ];if e
-      if include? "ze" typegroup [
-        append sentence " di"
-        append sentence do blockgroup/(findnum "ze" typegroup)/text
-      ];if ze
-      if include? "ke" typegroup [
-        append sentence " ke"
-        append sentence do blockgroup/(findnum "ke" typegroup)/text
-      ];if ke
-      if include? "pe" typegroup [
-        append sentence " dari"
-        append sentence do blockgroup/(findnum "pe" typegroup)/text
-      ];if pe
-    ];if pa
-    if include? "ka" typegroup [
-      append sentence " akan "
-      append sentence do blockgroup/(findnum "ka" typegroup)/text
-      if include? "e" typegroup [
-        append sentence " "
-        append sentence do blockgroup/(findnum "e" typegroup)/text
-      ];if e
-      if include? "ze" typegroup [
-        append sentence " di"
-        append sentence do blockgroup/(findnum "ze" typegroup)/text
-      ];if ze
-      if include? "ke" typegroup [
-        append sentence " ke"
-        append sentence do blockgroup/(findnum "ke" typegroup)/text
-      ];if ke
-      if include? "pe" typegroup [
-        append sentence " dari"
-        append sentence do blockgroup/(findnum "pe" typegroup)/text
-      ];if pe
-    ];if ka
-  ];if i
   return sentence
 ]
 
 zu: func [a [string!] b [string!]][
-  return rejoin[a " ketika " b]
+  return rejoin[a " zu " b]
 ]
 
 zupa: func [a [string!] b [string!]][
-  return rejoin[a " sebelum " b]
+  return rejoin[a " zupa " b]
 ]
 
 zuka: func [a [string!] b [string!]][
-  return rejoin[a " setelah " b]
+  return rejoin[a " zuka " b]
 ]
 
 su: func [a [string!] b [string!]][
-  return rejoin[a " jika " b]
+  return rejoin[a " su " b]
 ]
 
 hu: func [a [string!] b [string!]][
-  return rejoin[a " tentang " b]
+  return rejoin[a " hu " b]
 ]
