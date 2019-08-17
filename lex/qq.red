@@ -101,7 +101,11 @@ ieoa: func [blockgroup [block!] typegroup [block!] /sentence][; buradayım
         either blockgroup/1/1 = "m" and blockgroup/1/2 = " " [
           append sentence rejoin ["i" blockgroup/1]
         ][
-          append sentence rejoin ["i " blockgroup/1]
+          either blockgroup/1/1 = "n" and blockgroup/1/2 = " " [
+            append sentence rejoin ["i" blockgroup/1]
+          ][
+            append sentence rejoin ["i " blockgroup/1]
+          ]
         ]
       ]
       "a" [append sentence ["a " blockgroup/1]]
@@ -109,7 +113,11 @@ ieoa: func [blockgroup [block!] typegroup [block!] /sentence][; buradayım
         either blockgroup/1/1 = "m" and blockgroup/1/2 = " " [
           append sentence rejoin ["e" blockgroup/1]
         ][
-          append sentence rejoin ["e " blockgroup/1]
+          either blockgroup/1/1 = "n" and blockgroup/1/2 = " " [
+            append sentence rejoin ["i" blockgroup/1]
+          ][
+            append sentence rejoin ["e " blockgroup/1]
+          ]
         ]
       ]
     ]
