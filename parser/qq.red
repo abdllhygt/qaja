@@ -13,9 +13,10 @@ number: charset "123456789"
 !number: [number any [number | "0"]]
 
 word: [consonant word-vowel consonant word-vowel]
-name: [any [vowel | consonant]]
+name: [juchar any juchar]
 !xo: [consonant "o"]
 !xe: [consonant "e"]
+!word: [word any [space word]]
 
 !ju: ["ju" (juText: copy {(ju "})
   space copy _ju [juchar any juchar] (append juText rejoin[_ju {") }])
@@ -25,7 +26,7 @@ name: [any [vowel | consonant]]
   [
     copy _number !number (append iaText rejoin["number: " _number " "])
     | copy _adjective ["he" opt word] (append iaText rejoin[{adjective: "} _adjective {" }])
-    | copy _word [opt !xe word opt !xo] (append iaText rejoin[{word: "} _word {" }])
+    | copy _word [opt !xe !word opt !xo] (append iaText rejoin[{word: "} _word {" }])
       opt ["o" (append iaText rejoin[{determiner: "o" }])]
       opt ["w" (append iaText rejoin[{plural: true }])]
     | copy _determiner  ["ni" | "nia" | "na"] (append iaText rejoin[{determiner: "} _determiner {" }])
